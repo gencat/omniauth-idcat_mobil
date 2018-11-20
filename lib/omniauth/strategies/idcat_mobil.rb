@@ -37,6 +37,12 @@ module OmniAuth
       def client
         options.client_options[:site] = options.site
         options.client_options[:authorize_url] = URI.join(options.site, "/o/oauth2/auth").to_s
+        options.client_options[:authorize_params] = {
+          scope: :autenticacio_usuari,
+          response_type: :code,
+          approval_prompt: :auto,
+          access_type: :online,
+        }
         options.client_options[:token_url] = URI.join(options.site, "/o/oauth2/token").to_s
         super
       end
