@@ -7,7 +7,7 @@ Gem::Specification.new do |spec|
   spec.name          = "omniauth-idcat_mobil"
   spec.version       = Omniauth::IdCatMobil::VERSION
   spec.authors       = ["Oliver Valls"]
-  spec.email         = ["oliver.hv@coditramuntana.com"]
+  spec.email         = ["oliver.vh@coditramuntana.com"]
 
   spec.summary       = %q{User registration and login through IdCat mòbil.}
   spec.description   = %q{Authentication method that uses OAuth 2.0 protocol.}
