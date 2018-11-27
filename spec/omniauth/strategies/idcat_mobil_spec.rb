@@ -23,13 +23,29 @@ describe OmniAuth::Strategies::IdCatMobil do
       [200, {}, ["Hello."]]
     end
   end
-  let(:raw_info_hash) do
+  let(:uid) { {"identifier" => "123456789"} }
+  let(:info) do
     {
-      "name" => "IdCat Mòbil",
-      "email" => "foo@example.com",
-      "nickname" => "Foo Bar",
-      "image" => "http://example.org/avatar.jpeg"
+      "email"           => "email@example.net",
+      "name"            => "Oriol",
+      "prefix"          => "972",
+      "phone"           => "505152",
+      "surname1"        => "Junqueras",
+      "surname2"        => "Vies",
+      "surnames"        => "Junqueras Vies",
+      "countryCode"    => "CAT",
+    }    
+  end
+  let(:extra) do
+    {
+      "identifier_type" => "1",
+      "method"          => "idcatmobil",
+      "assurance_level" => "low",
+      "status"          => "ok"
     }
+  end
+  let(:raw_info_hash) do
+    uid.merge(info).merge(extra)
   end
 
   before do
@@ -37,7 +53,7 @@ describe OmniAuth::Strategies::IdCatMobil do
   end
 
   describe "client options" do
-    it 'should have correct name' do
+    it "should have correct name" do
       expect(subject.options.name).to eq(:idcat_mobil)
     end
 
@@ -62,6 +78,15 @@ describe OmniAuth::Strategies::IdCatMobil do
     it "has the correct token url" do
       expect(subject.client.options[:token_url]).to eq("https://identitats-pre.aoc.cat/o/oauth2/token")
     end
+
+    it "should have correct AccessToken params" do
+      expect(subject.client.options[:auth_token_params][:mode]).to eq(:query)
+      expect(subject.client.options[:auth_token_params][:param_name]).to eq('AccessToken')
+    end
+
+    it "should have the correct user_info_path" do
+      expect(subject.options.user_info_path).to eq("/serveis-rest/getUserInfo")
+    end
   end
 
   describe "#callback_url" do
@@ -73,25 +98,46 @@ describe OmniAuth::Strategies::IdCatMobil do
     end
   end
 
+  describe "uid" do
+    before do
+      allow(strategy).to receive(:raw_info).and_return(raw_info_hash)
+    end
+
+    it "returns the identifier" do
+      expect(subject.uid).to eq(uid['identifier'])
+    end
+  end
+
   describe "info" do
     before do
       allow(strategy).to receive(:raw_info).and_return(raw_info_hash)
     end
 
-    it "returns the nickname" do
-      expect(subject.info[:nickname]).to eq(raw_info_hash["nickname"])
+    it "returns the set of info fields" do
+      h= keys_to_sym(info)
+      h[:country_code]= h.delete(:countryCode)
+      expect(subject.info).to eq(h)
+    end
+  end
+
+  describe "extra" do
+    before do
+      allow(strategy).to receive(:raw_info).and_return(raw_info_hash)
     end
 
-    it "returns the name" do
-      expect(subject.info[:name]).to eq(raw_info_hash["name"])
+    it "returns the set of info fields" do
+      h= keys_to_sym(extra)
+      h[:identifier_type]= h.delete(:identifierType)
+      h[:assurance_level]= h.delete(:assuranceLevel)
+      expect(subject.extra).to eq(h)
     end
+  end
 
-    it "returns the email" do
-      expect(subject.info[:email]).to eq(raw_info_hash["email"])
+  def keys_to_sym(hash)
+    new_hash = {}
+    hash.each_pair do |key, value|
+      new_hash[key.to_sym]= value
     end
-
-    it "returns the image" do
-      expect(subject.info[:image]).to eq(raw_info_hash["image"])
-    end
+    new_hash
   end
 end
