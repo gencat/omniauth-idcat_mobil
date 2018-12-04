@@ -37,7 +37,6 @@ module OmniAuth
           surname2: raw_info["surname2"],
           surnames: raw_info["surnames"],
           country_code: raw_info["countryCode"],
-          email: raw_info["email"],
         }
       end
 
