@@ -3,6 +3,8 @@
 User registration and login through IdCat mòbil, an authentication method that uses OAuth 2.0 protocol.
 _IdCat mòbil_ is an identity validator from VÀLid (Validador d'Identitats del Consorci AOC).
 
+Further information: https://web.gencat.cat/ca/tramits/com-tramitar-en-linia/identificacio-digital/id-cat-mobil
+
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -21,7 +23,24 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Users must be registered at _IdCat mòbil_. To do so, you can register online or offline, check how [here]( https://web.gencat.cat/ca/tramits/com-tramitar-en-linia/identificacio-digital/id-cat-mobil/#bloc2).
+
+Next, tell OmniAuth about this strategy. In a Rails application using Devise you would create a file like config/initializers/omniauth_idcat_mobil.rb with this code:
+
+```ruby
+Devise.setup do |config|
+  config.omniauth :idcat_mobil,
+                  ENV["IDCAT_MOBIL_CLIENT_ID"],
+                  ENV["IDCAT_MOBIL_CLIENT_SECRET"],
+                  ENV["IDCAT_MOBIL_SITE_URL"],
+                  scope: :autenticacio_usuari
+end
+```
+
+`omniauth-idcat_mobil` is a standard OAuth2 strategy. It is based on `omniauth-oauth2` that is just an `omniauth` extension. Thus, you can also integrate it using [`omniauth` integrating guide](https://github.com/omniauth/omniauth).
+
+## Incon assets
+We're including _IdCat mòbil_ icons in lib/decidim/idcat_mobil for the joy of the developer. They can be used to complement the OAuth2 button or alike.
 
 ## Development
 
