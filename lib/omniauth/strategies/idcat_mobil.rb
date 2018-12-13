@@ -61,14 +61,19 @@ module OmniAuth
         }
         options.client_options[:token_url] = URI.join(options.site, "/o/oauth2/token").to_s
         options.client_options[:auth_token_params] = {
-          mode: :query,
-          param_name: 'AccessToken'
+          client_id: super.id,
+          client_secret: super.secret,
+          redirect_uri: callback_url
         }
         super
       end
 
       def raw_info
-        @raw_info ||= access_token.get(options.user_info_path).parsed
+        opts= {
+          mode: :query, # put the param in the query of the requested url
+          param_name: 'AccessToken'
+        }
+        @raw_info ||= access_token.get(options.user_info_path, opts).parsed
       end
 
       # https://github.com/intridea/omniauth-oauth2/issues/81
