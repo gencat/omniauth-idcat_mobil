@@ -80,8 +80,8 @@ describe OmniAuth::Strategies::IdCatMobil do
     end
 
     it "should have correct AccessToken params" do
-      expect(subject.client.options[:auth_token_params][:mode]).to eq(:query)
-      expect(subject.client.options[:auth_token_params][:param_name]).to eq('AccessToken')
+      expect(subject.options.auth_token_params[:mode]).to eq(:query)
+      expect(subject.options.auth_token_params[:param_name]).to eq('AccessToken')
     end
 
     it "should have the correct user_info_path" do

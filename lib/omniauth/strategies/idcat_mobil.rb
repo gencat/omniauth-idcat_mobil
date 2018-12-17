@@ -16,8 +16,12 @@ module OmniAuth
       args [:client_id, :client_secret, :site]
 
       option :name, :idcat_mobil
-      option :site, nil
-      option :client_options, {}
+      # option :site, nil
+      # option :client_options, {}
+      option :auth_token_params, {
+        mode: :query, # put the param in the query of the requested url
+        param_name: 'AccessToken'
+      }
 
       option :user_info_path, "/serveis-rest/getUserInfo"
 
@@ -60,20 +64,16 @@ module OmniAuth
           access_type: :online,
         }
         options.client_options[:token_url] = URI.join(options.site, "/o/oauth2/token").to_s
-        options.client_options[:auth_token_params] = {
-          client_id: super.id,
-          client_secret: super.secret,
-          redirect_uri: callback_url
-        }
+        # options.client_options[:auth_token_params] = {
+        #   client_id: super.id,
+        #   client_secret: super.secret,
+        #   redirect_uri: callback_url
+        # }
         super
       end
 
       def raw_info
-        opts= {
-          mode: :query, # put the param in the query of the requested url
-          param_name: 'AccessToken'
-        }
-        @raw_info ||= access_token.get(options.user_info_path, opts).parsed
+        @raw_info ||= access_token.get(options.user_info_path).parsed
       end
 
       # https://github.com/intridea/omniauth-oauth2/issues/81
