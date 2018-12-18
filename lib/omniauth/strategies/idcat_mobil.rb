@@ -72,6 +72,15 @@ module OmniAuth
         super
       end
 
+      # Override default request_phase to perform a logout if token exists.
+      def request_phase
+        if access_token
+          logout_url= URI.join(options.site, "/o/oauth2/logout?token=#{access_token.token}").to_s
+          access_token.get(logout_url)
+        end
+        super
+      end
+
       def raw_info
         @raw_info ||= access_token.get(options.user_info_path).parsed
       end
