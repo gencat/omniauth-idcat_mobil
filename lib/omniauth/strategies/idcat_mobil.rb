@@ -16,8 +16,6 @@ module OmniAuth
       args [:client_id, :client_secret, :site]
 
       option :name, :idcat_mobil
-      # option :site, nil
-      # option :client_options, {}
       option :auth_token_params, {
         mode: :query, # put the param in the query of the requested url
         param_name: 'AccessToken'
@@ -64,25 +62,22 @@ module OmniAuth
           access_type: :online,
         }
         options.client_options[:token_url] = URI.join(options.site, "/o/oauth2/token").to_s
-        # options.client_options[:auth_token_params] = {
-        #   client_id: super.id,
-        #   client_secret: super.secret,
-        #   redirect_uri: callback_url
-        # }
-        super
-      end
-
-      # Override default request_phase to perform a logout if token exists.
-      def request_phase
-        if access_token
-          logout_url= URI.join(options.site, "/o/oauth2/logout?token=#{access_token.token}").to_s
-          access_token.get(logout_url)
-        end
+        options.client_options[:auth_token_params] = {
+          client_id: super.id,
+          client_secret: super.secret,
+          redirect_uri: callback_url
+        }
         super
       end
 
       def raw_info
-        @raw_info ||= access_token.get(options.user_info_path).parsed
+        unless @raw_info
+          @raw_info= access_token.get(options.user_info_path).parsed
+          # Logout to avoid problems with IdCat mòbil's cookie session when trying to login again.
+          logout_url= URI.join(options.site, "/o/oauth2/logout?token=#{access_token.token}").to_s
+          access_token.get(logout_url)
+        end
+        @raw_info
       end
 
       # https://github.com/intridea/omniauth-oauth2/issues/81
