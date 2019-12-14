@@ -11,7 +11,6 @@ describe OmniAuth::Strategies::IdCatMobil do
   let(:parsed_response) { instance_double("ParsedResponse") }
   let(:response) { instance_double("Response", parsed: parsed_response) }
   let(:strategy) do
-    args= ['appid', 'secret', @options || {}].compact
     described_class.new(
       app,
       "CLIENT_ID",
@@ -50,6 +49,8 @@ describe OmniAuth::Strategies::IdCatMobil do
 
   before do
     allow(strategy).to receive(:access_token).and_return(access_token)
+    OmniAuth.config.full_host= "https://test.participa.gencat.cat"
+    allow(strategy).to receive(:script_name).and_return("/users")
   end
 
   describe "client options" do
@@ -91,9 +92,6 @@ describe OmniAuth::Strategies::IdCatMobil do
 
   describe "#callback_url" do
     it "is a combination of host, script name, and callback path" do
-      OmniAuth.config.full_host= "https://test.participa.gencat.cat"
-      allow(strategy).to receive(:script_name).and_return("/users")
-
       expect(subject.callback_url).to eq("https://test.participa.gencat.cat/users/auth/idcat_mobil/callback")
     end
   end
