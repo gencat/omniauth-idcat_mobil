@@ -2,7 +2,11 @@
 
 ## next version:
 
-## Version 0.2.0 (PATCH)
+## Version 0.2.1 (PATCH)
+- Apply security upgrades
+- Add a .ruby-version file
+
+## Version 0.2.0 (MINOR)
 - Remove Gemfile.lock to avoid forcing the versioning of apps using this gem.
 
 ## Version 0.1.1 (PATCH)
