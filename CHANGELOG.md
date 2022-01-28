@@ -4,6 +4,7 @@
 
 ## Version 0.2.2 (PATCH)
 - Fix internal `log` method is wrongly invoked from `omniauth`.
+- Bump Ruby version to 2.7.5
 
 ## Version 0.2.1 (PATCH)
 - Apply security upgrades
