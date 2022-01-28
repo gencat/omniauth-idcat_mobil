@@ -2,6 +2,9 @@
 
 ## next version:
 
+## Version 0.2.2 (PATCH)
+- Fix internal `log` method is wrongly invoked from `omniauth`.
+
 ## Version 0.2.1 (PATCH)
 - Apply security upgrades
 - Add a .ruby-version file
