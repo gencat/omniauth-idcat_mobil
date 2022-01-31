@@ -89,7 +89,7 @@ module OmniAuth
       # That's what we do in this callback.
       def callback_phase
         idcat_log("In `callback_phase` with request params: #{request.params}")
-        idcat_log("Both should be equal otherwise a 'CSRF detected' error is raised: params state[#{request.params["state"]}] =? [#{session.delete("omniauth.state")}] session state.")
+        idcat_log("Both should be equal otherwise a 'CSRF detected' error is raised: params state[#{request.params["state"]}] =? [#{session["omniauth.state"]}] session state.")
         super
       end
 

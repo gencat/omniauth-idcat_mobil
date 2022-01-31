@@ -2,8 +2,12 @@
 
 ## next version:
 
+## Version 0.2.3 (PATCH)
+- FIX: do not delete the session state before checking it.
+- DOC: Correct mispelling in README
+
 ## Version 0.2.2 (PATCH)
-- Fix internal `log` method is wrongly invoked from `omniauth`.
+- FIX: Fix internal `log` method is wrongly invoked from `omniauth`.
 - Bump Ruby version to 2.7.5
 
 ## Version 0.2.1 (PATCH)

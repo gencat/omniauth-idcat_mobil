@@ -29,9 +29,9 @@ describe OmniAuth::Strategies::IdCatMobil do
       "name"            => "Oriol",
       "prefix"          => "972",
       "phone"           => "505152",
-      "surname1"        => "Junqueras",
-      "surname2"        => "Vies",
-      "surnames"        => "Junqueras Vies",
+      "surname1"        => "Junquerol",
+      "surname2"        => "Balaguer",
+      "surnames"        => "Junquerol Balaguer",
       "countryCode"    => "CAT",
     }    
   end
