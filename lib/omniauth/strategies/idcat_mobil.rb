@@ -94,7 +94,7 @@ module OmniAuth
       end
 
       def raw_info
-        idcat_log("Access token response was: #{access_token.response}")
+        idcat_log("Access token response was: #{access_token.try(:response)}")
         idcat_log("Performing getUserInfo...")
         unless @raw_info
           response= access_token.get(options.user_info_path)
