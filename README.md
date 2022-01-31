@@ -57,7 +57,7 @@ When users get authenticated, we still need to negotiate the access_token that w
 The access_token is obtained by performing a POST request to the provider. If this succeeds then we're ready to go and perform te `getUserInfo` request. This request is implemented in the `raw_info` method.
 After a successful `getUserInfo` the superclass of this strategy fills the `info` so that our host application can access it and finishes with its authentication task.
 
-## Incon assets
+## Icon assets
 We're including _IdCat mòbil_ icons in lib/decidim/idcat_mobil for the joy of the developer. They can be used to complement the OAuth2 button or alike.
 
 ## Development
