@@ -3,7 +3,7 @@
 ## next version:
 
 ## Version 0.3.0 (MINOR)
-- CI: Intoduce continous integration via GitHub Actions.
+- CI: Introduce continuous integration via GitHub Actions.
 - CI: Apply `rubocop` recommendations.
 
 ## Version 0.2.4 (PATCH)
