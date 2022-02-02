@@ -15,32 +15,33 @@ describe OmniAuth::Strategies::IdCatMobil do
       app,
       "CLIENT_ID",
       "CLIENT_SECRET",
-      "https://identitats-pre.aoc.cat")
+      "https://identitats-pre.aoc.cat"
+    )
   end
   let(:app) do
     lambda do |_env|
       [200, {}, ["Hello."]]
     end
   end
-  let(:uid) { {"identifier" => "123456789"} }
+  let(:uid) { { "identifier" => "123456789" } }
   let(:info) do
     {
-      "email"           => "email@example.net",
-      "name"            => "Oriol",
-      "prefix"          => "972",
-      "phone"           => "505152",
-      "surname1"        => "Junquerol",
-      "surname2"        => "Balaguer",
-      "surnames"        => "Junquerol Balaguer",
-      "countryCode"    => "CAT",
-    }    
+      "email" => "email@example.net",
+      "name" => "Oriol",
+      "prefix" => "972",
+      "phone" => "505152",
+      "surname1" => "Junquerol",
+      "surname2" => "Balaguer",
+      "surnames" => "Junquerol Balaguer",
+      "countryCode" => "CAT"
+    }
   end
   let(:extra) do
     {
       "identifier_type" => "1",
-      "method"          => "idcatmobil",
+      "method" => "idcatmobil",
       "assurance_level" => "low",
-      "status"          => "ok"
+      "status" => "ok"
     }
   end
   let(:raw_info_hash) do
@@ -54,22 +55,22 @@ describe OmniAuth::Strategies::IdCatMobil do
   end
 
   describe "client options" do
-    it "should have correct name" do
+    it "has correct name" do
       expect(subject.options.name).to eq(:idcat_mobil)
     end
 
-    it "should have correct site" do
+    it "has correct site" do
       expect(subject.client.site).to eq("https://identitats-pre.aoc.cat")
     end
 
-    it "should have correct authorize url" do
+    it "has correct authorize url" do
       expect(subject.client.options[:authorize_url]).to eq("https://identitats-pre.aoc.cat/o/oauth2/auth")
     end
 
-    it "should have correct authorize params" do
+    it "has correct authorize params" do
       # https://identitats-pre.aoc.cat/o/oauth2/auth?client_id=xxxxxx&redirect_uri=http%3A%2F%2Flocalhost%3A3000%2Fusers%2Fauth%2Fidcat_mobil%2Fcallback&response_type=code&state=2ec1a9a9db94fbce7f19ee30d682ab75f97f4fd67848773c&approval_prompt=auto&scope=autenticacio_usuari&response_type=code
-      expect(subject.client.id).to eq('CLIENT_ID')
-      expect(subject.client.secret).to eq('CLIENT_SECRET')
+      expect(subject.client.id).to eq("CLIENT_ID")
+      expect(subject.client.secret).to eq("CLIENT_SECRET")
       expect(subject.client.options[:authorize_params][:scope]).to eq(:autenticacio_usuari)
       expect(subject.client.options[:authorize_params][:response_type]).to eq(:code)
       expect(subject.client.options[:authorize_params][:approval_prompt]).to eq(:auto)
@@ -80,12 +81,12 @@ describe OmniAuth::Strategies::IdCatMobil do
       expect(subject.client.options[:token_url]).to eq("https://identitats-pre.aoc.cat/o/oauth2/token")
     end
 
-    it "should have correct AccessToken params" do
+    it "has correct AccessToken params" do
       expect(subject.options.auth_token_params[:mode]).to eq(:query)
-      expect(subject.options.auth_token_params[:param_name]).to eq('AccessToken')
+      expect(subject.options.auth_token_params[:param_name]).to eq("AccessToken")
     end
 
-    it "should have the correct user_info_path" do
+    it "has the correct user_info_path" do
       expect(subject.options.user_info_path).to eq("/serveis-rest/getUserInfo")
     end
   end
@@ -102,7 +103,7 @@ describe OmniAuth::Strategies::IdCatMobil do
     end
 
     it "returns the identifier" do
-      expect(subject.uid).to eq(uid['identifier'])
+      expect(subject.uid).to eq(uid["identifier"])
     end
   end
 

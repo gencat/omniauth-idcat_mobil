@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require "omniauth/idcat_mobil/version"
 require "omniauth/strategies/idcat_mobil"
 
