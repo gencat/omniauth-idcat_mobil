@@ -2,6 +2,10 @@
 
 ## next version:
 
+## Version 0.3.0 (MINOR)
+- CI: Intoduce continous integration via GitHub Actions.
+- CI: Apply `rubocop` recommendations.
+
 ## Version 0.2.4 (PATCH)
 - FIX: do not delete the session state before checking it.
 - DOC: Change CHANGELOG format, prefix with change type.
