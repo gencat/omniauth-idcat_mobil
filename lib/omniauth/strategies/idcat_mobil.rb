@@ -18,7 +18,7 @@ module OmniAuth
       option :name, :idcat_mobil
       option :auth_token_params, {
         mode: :query, # put the param in the query of the requested url
-        param_name: 'AccessToken'
+        param_name: "AccessToken"
       }
 
       option :user_info_path, "/serveis-rest/getUserInfo"
@@ -38,7 +38,7 @@ module OmniAuth
           surname1: raw_info["surname1"],
           surname2: raw_info["surname2"],
           surnames: raw_info["surnames"],
-          country_code: raw_info["countryCode"],
+          country_code: raw_info["countryCode"]
         }
       end
 
@@ -59,7 +59,7 @@ module OmniAuth
           scope: :autenticacio_usuari,
           response_type: :code,
           approval_prompt: :auto,
-          access_type: :online,
+          access_type: :online
         }
         options.client_options[:token_url] = URI.join(options.site, "/o/oauth2/token").to_s
         options.client_options[:auth_token_params] = {
@@ -74,7 +74,7 @@ module OmniAuth
       #
       # It is implemented in the OAuth2 superclass, and does the follwing:
       # redirect client.auth_code.authorize_url({:redirect_uri => callback_url}.merge(options.authorize_params))
-      # 
+      #
       # We're overriding solely to log.
       def request_phase
         idcat_log("In `request_phase`, with params: redirect_uri=>#{callback_url}, options=>#{options.authorize_params}")
@@ -99,7 +99,7 @@ module OmniAuth
         else
           idcat_log("Performing getUserInfo...")
           response= access_token.get(options.user_info_path)
-          result= %i(status headers body).collect  {|m| response.send(m)}
+          result= [:status, :headers, :body].collect { |m| response.send(m) }
           idcat_log("getUserInfo response status/headers/body: #{result}")
           @raw_info= response.parsed
           # Logout to avoid problems with IdCat mòbil's cookie session when trying to login again.
@@ -117,6 +117,7 @@ module OmniAuth
 
       # --------------------------------------------------
       private
+
       # --------------------------------------------------
 
       def idcat_log(msg)
@@ -124,7 +125,7 @@ module OmniAuth
       end
 
       def idcat_logger
-        @idcat_logger||= defined?(Rails.logger) ? Rails.logger : Logger.new(STDOUT, progname: 'idcat_mobil')
+        @idcat_logger||= defined?(Rails.logger) ? Rails.logger : Logger.new($stdout, progname: "idcat_mobil")
       end
     end
   end
