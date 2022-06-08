@@ -51,7 +51,8 @@ describe OmniAuth::Strategies::IdCatMobil do
   before do
     allow(strategy).to receive(:access_token).and_return(access_token)
     OmniAuth.config.full_host= "https://test.participa.gencat.cat"
-    allow(strategy).to receive(:script_name).and_return("/users")
+    allow(strategy).to receive(:script_name).and_return("")
+    allow(strategy).to receive(:callback_path).and_return("/users/auth/idcat_mobil/callback")
   end
 
   describe "client options" do

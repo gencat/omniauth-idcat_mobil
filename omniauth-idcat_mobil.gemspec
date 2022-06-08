@@ -24,9 +24,10 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "omniauth", "~> 1.5"
-  spec.add_dependency "omniauth-oauth2", ">= 1.4.0", "< 2.0"
+  spec.add_dependency "omniauth", "~> 2.0.4"
+  spec.add_dependency "omniauth-oauth2", ">= 1.7.2", "< 2.0"
   spec.add_development_dependency "bundler", "~> 2.2", ">= 2.2.10"
+  spec.add_development_dependency "byebug"
   spec.add_development_dependency "rake", "~> 12.3", ">= 12.3.3"
   spec.metadata["rubygems_mfa_required"] = "true"
 end
