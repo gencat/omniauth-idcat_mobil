@@ -2,6 +2,9 @@
 
 ## next version:
 
+## Version 0.4.0 (MINOR)
+- Upgrade omniauth to 2.0.4
+
 ## Version 0.3.0 (MINOR)
 - CI: Introduce continuous integration via GitHub Actions.
 - CI: Apply `rubocop` recommendations.

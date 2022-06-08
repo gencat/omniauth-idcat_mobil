@@ -46,7 +46,7 @@ For IdCat mòbil we still need to perform an extra step during the +callback_pha
 
 ### request_phase
 
-`omniauth-idcat_mobil` does not implement this method, instead we rely in the default implementation in `OmniAuth::Strategies::OAuth2`.
+`omniauth-idcat_mobil` does not implement this method, instead we rely on the default implementation in `OmniAuth::Strategies::OAuth2`.
 It simply redirects the user to the authentiction provider to authenticate.
 When users finish with the authentication workflow in IdCat mòbil, this authentication provider redirects them to our `callback_phase`.
 
