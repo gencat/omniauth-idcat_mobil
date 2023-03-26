@@ -20,6 +20,8 @@ module OmniAuth
         mode: :query, # put the param in the query of the requested url
         param_name: "AccessToken"
       }
+      # will be merged with token_params
+      option :token_options, [:client_id, :client_secret]
 
       option :user_info_path, "/serveis-rest/getUserInfo"
 

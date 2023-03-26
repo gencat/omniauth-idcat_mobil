@@ -6,6 +6,7 @@ require "rack/test"
 require "omniauth"
 require "omniauth/test"
 require "omniauth/idcat_mobil"
+require "byebug"
 
 RSpec.configure do |config|
   config.include Rack::Test::Methods
