@@ -2,6 +2,9 @@
 
 ## next version:
 
+## Version 0.5.0 (MINOR)
+- Send the client_id and the client_secret during the AuthToken retrieval.
+
 ## Version 0.4.0 (MINOR)
 - Upgrade omniauth to 2.0.4
 
