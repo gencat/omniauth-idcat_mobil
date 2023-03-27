@@ -87,6 +87,10 @@ describe OmniAuth::Strategies::IdCatMobil do
       expect(subject.options.auth_token_params[:param_name]).to eq("AccessToken")
     end
 
+    it "has correct token_params" do
+      expect(subject.token_params).to eq({ "client_id"=>"CLIENT_ID", "client_secret"=>"CLIENT_SECRET" })
+    end
+
     it "has the correct user_info_path" do
       expect(subject.options.user_info_path).to eq("/serveis-rest/getUserInfo")
     end
