@@ -123,7 +123,7 @@ module OmniAuth
       # --------------------------------------------------
 
       def idcat_log(msg)
-        idcat_logger.debug(msg)
+        idcat_logger.info("[idcat_mobil] #{msg}")
       end
 
       def idcat_logger

@@ -2,6 +2,10 @@
 
 ## next version:
 
+## Version 0.6.0 (MINOR)
+- Bump omniauth dependency to v2.1 series.
+- Force Hashie >= 5.0.0.
+
 ## Version 0.5.0 (MINOR)
 - Send the client_id and the client_secret during the AuthToken retrieval.
 
