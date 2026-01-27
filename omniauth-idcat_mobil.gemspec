@@ -24,6 +24,8 @@ Gem::Specification.new do |spec|
   spec.executables = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ["lib"]
 
+  # Hashie >= 5.0.0 is required for compatibility with newer ActiveSupport versions.
+  # Older versions of Hashie have conflicts with ActiveSupport's Hash extensions.
   spec.add_dependency "hashie", ">=5.0.0"
   spec.add_dependency "omniauth", "~> 2.1.2"
   spec.add_dependency "omniauth-oauth2", ">= 1.7.2", "< 2.0"
